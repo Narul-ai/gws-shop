@@ -17,7 +17,7 @@ export default function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/products?category=${category}`)
+    axios.get(`https://gws-shop.onrender.com/api/products?category=${category}`)
       .then(res => setProducts(res.data))
       .catch(err => console.error(err));
   }, [category]);
