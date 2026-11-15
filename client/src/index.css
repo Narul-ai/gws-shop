@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #FAF8F5;
+    color: #231812;
+  }
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
 @layer utilities {
   /* Плавное всплытие карточек при загрузке */
   @keyframes fadeInUp {
@@ -38,5 +52,14 @@
     display: flex;
     width: 200%;
     animation: marquee 15s linear infinite;
+  }
+
+  /* Скрытие скроллбара в горизонтальных списках на мобилках */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

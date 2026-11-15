@@ -1,3 +1,9 @@
+const mongoose = require('mongoose');
+require('dotenv').config();
+
+// Подключаем модель (если модель называется иначе или в другом файле, поправь путь)
+const Product = require('./models/Product');
+
 const initialProducts = [
   {
     title: "Элегантное пальто KAS live",
@@ -62,3 +68,24 @@ const initialProducts = [
     image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=600&auto=format&fit=crop"
   }
 ];
+
+const seedDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("Подключено к MongoDB...");
+
+    // Очищаем старую коллекцию (чтобы не было дубликатов)
+    await Product.deleteMany({});
+    
+    // Вставляем начальные товары
+    await Product.insertMany(initialProducts);
+    console.log("Товары успешно загружены!");
+
+    process.exit();
+  } catch (err) {
+    console.error("Ошибка при сидинге базы:", err);
+    process.exit(1);
+  }
+};
+
+seedDB();
