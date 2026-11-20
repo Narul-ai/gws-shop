@@ -3,31 +3,31 @@ import { Truck, Store, MapPin, Check, Ruler, ShieldCheck } from 'lucide-react';
 
 export const ProductModalContent = ({ product, onClose }) => {
   const [selectedSize, setSelectedSize] = useState(product.sizes?.[0] || '');
-  const [deliveryType, setDeliveryType] = useState('astana');
+  const [deliveryType, setDeliveryType] = useState('courier');
   const [showSizeGuide, setShowSizeGuide] = useState(false);
 
   const formatMoney = (num) => num?.toLocaleString('ru-RU') + ' ₸';
 
   const deliveryOptions = [
     {
-      id: 'astana',
-      title: 'Доставка с примеркой',
-      subtitle: 'По Астане в течение дня (бесплатно при выкупе)',
-      label: 'Доставка по Астане (с примеркой)',
+      id: 'courier',
+      title: 'Курьерская доставка с примеркой',
+      subtitle: 'По городу в течение дня (бесплатно при выкупе)',
+      label: 'Курьерская доставка по городу (с примеркой)',
       icon: Truck,
     },
     {
       id: 'pickup',
       title: 'Забрать из Showroom',
-      subtitle: 'г. Астана, пр. Мангилик Ел — забронируем на 24 часа',
-      label: 'Самовывоз из Showroom в Астане',
+      subtitle: 'Центральный проспект, 10 — забронируем на 24 часа',
+      label: 'Самовывоз из Showroom',
       icon: Store,
     },
     {
-      id: 'kazakhstan',
-      title: 'Доставка по Казахстану',
-      subtitle: 'CDEK / Казпочта до двери за 1–3 рабочих дня',
-      label: 'Доставка по Казахстану (CDEK / Казпочта)',
+      id: 'country',
+      title: 'Доставка по стране',
+      subtitle: 'Курьерской службой до двери за 1–3 рабочих дня',
+      label: 'Доставка по стране (до двери)',
       icon: MapPin,
     },
   ];
@@ -35,7 +35,7 @@ export const ProductModalContent = ({ product, onClose }) => {
   const sendWhatsAppOrder = () => {
     const size = selectedSize || 'Нужна помощь с размером';
     const currentDelivery = deliveryOptions.find((d) => d.id === deliveryType)?.label;
-    const text = `Здравствуйте! Хочу заказать в GWS:%0A• *Товар:* ${product.title}%0A• *Размер:* ${size}%0A• *Цена:* ${formatMoney(product.price)}%0A• *Способ получения:* ${currentDelivery}`;
+    const text = `Здравствуйте! Хочу оформить заказ:%0A• *Товар:* ${product.title}%0A• *Размер:* ${size}%0A• *Цена:* ${formatMoney(product.price)}%0A• *Способ получения:* ${currentDelivery}`;
     window.open(`https://wa.me/77000000000?text=${text}`, '_blank');
     onClose();
   };

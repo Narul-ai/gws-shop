@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
 import { ProductModalContent } from './modals/ProductModalContent';
 import { FastOrderModalContent } from './modals/FastOrderModalContent';
@@ -9,21 +9,48 @@ export const OrderModal = ({
   onClose,
   mode,
   selectedProduct,
-  favorites,
-  products,
+  favorites = [],
+  products = [],
   onSelectProduct,
 }) => {
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (!isOpen) return;
 
-  const isProductMode = mode.type === 'product' && selectedProduct;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose?.();
+      }
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen || !mode) return null;
+
+  const isProductMode = mode.type === 'product' && Boolean(selectedProduct);
   const favProducts = products.filter((p) => favorites.includes(p._id));
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-end md:items-center justify-center p-0 md:p-4 transition-all">
+    <div
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-end md:items-center justify-center p-0 md:p-4 transition-opacity duration-200"
+    >
       {/* Клик по фону закрывает модалку */}
-      <div className="absolute inset-0" onClick={onClose} />
+      <div
+        className="absolute inset-0 cursor-pointer"
+        onClick={onClose}
+        aria-hidden="true"
+      />
 
-      {/* Адаптивный контейнер: снизу на мобилке, по центру на ПК (шире для карточки товара) */}
+      {/* Адаптивный контейнер: шторка снизу на мобилке, окно по центру на ПК */}
       <div
         className={`relative z-10 bg-[#FAF7F5] w-full ${
           isProductMode ? 'md:max-w-3xl' : 'md:max-w-md'
@@ -32,30 +59,33 @@ export const OrderModal = ({
         {/* Полоска для свайпа только на мобильном */}
         <div className="md:hidden w-12 h-1.5 bg-[#D5BEB1] rounded-full mx-auto mb-5" />
 
-        {/* Кнопка закрытия */}
+        {/* Кнопка закрытия остаётся доступной при прокрутке */}
         <button
+          type="button"
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 text-stone-400 hover:text-stone-800 bg-white rounded-full shadow-sm border border-stone-100 transition cursor-pointer"
-          aria-label="Закрыть"
+          className="sticky top-0 float-right z-20 -mt-2 -mr-2 md:-mt-3 md:-mr-3 p-2 text-stone-500 hover:text-[#2A1C16] hover:bg-[#F5EFEA] bg-white rounded-full shadow-sm border border-[#E6D9CF]/80 transition active:scale-95 cursor-pointer"
+          aria-label="Закрыть окно"
         >
           <X size={18} />
         </button>
 
-        {isProductMode && (
-          <ProductModalContent product={selectedProduct} onClose={onClose} />
-        )}
+        <div className="clear-both">
+          {isProductMode && (
+            <ProductModalContent product={selectedProduct} onClose={onClose} />
+          )}
 
-        {mode.type === 'fastOrder' && (
-          <FastOrderModalContent reason={mode.reason} onClose={onClose} />
-        )}
+          {mode.type === 'fastOrder' && (
+            <FastOrderModalContent reason={mode.reason} onClose={onClose} />
+          )}
 
-        {mode.type === 'favorites' && (
-          <FavoritesModalContent
-            favProducts={favProducts}
-            onSelectProduct={onSelectProduct}
-            onClose={onClose}
-          />
-        )}
+          {mode.type === 'favorites' && (
+            <FavoritesModalContent
+              favProducts={favProducts}
+              onSelectProduct={onSelectProduct}
+              onClose={onClose}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

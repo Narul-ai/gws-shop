@@ -7,7 +7,7 @@ export const Header = ({ favCount, onOpenFav, onOpenOrder, showToast }) => {
   const navLinks = [
     { name: 'Каталог', href: '#catalog' },
     { name: 'Преимущества', href: '#advantages' },
-    { name: 'Шоурум в Астане', href: '#showroom' },
+    { name: 'Шоурум', href: '#showroom' },
   ];
 
   const handleLinkClick = () => {
@@ -29,11 +29,11 @@ export const Header = ({ favCount, onOpenFav, onOpenOrder, showToast }) => {
           </button>
 
           <button
-            onClick={() => showToast && showToast("Шоурум в Астане: пр. Мангилик Ел")}
+            onClick={() => showToast && showToast("Шоурум: Центральный проспект, 10")}
             className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-wider text-[#845E4C] bg-[#F5EFEA] hover:bg-[#EFE5DD] px-3 py-1.5 rounded-full uppercase border border-[#E6D9CF]/60 transition cursor-pointer"
           >
             <MapPin size={12} />
-            Astana
+            Showroom
           </button>
 
           <nav className="hidden lg:flex items-center gap-7">
@@ -53,12 +53,12 @@ export const Header = ({ favCount, onOpenFav, onOpenOrder, showToast }) => {
         <div className="text-center flex-shrink-0">
           <a
             href="#"
-            className="font-serif text-2xl md:text-3xl font-bold tracking-[0.25em] text-[#2A1C16] block leading-none"
+            className="font-serif text-xl md:text-2xl font-bold tracking-[0.22em] text-[#2A1C16] block leading-none uppercase"
           >
-            G W S
+            Your Store
           </a>
           <span className="text-[8px] md:text-[9px] uppercase tracking-[0.3em] text-[#B89685] font-medium block mt-1">
-            Go With Style
+            Fashion & Style
           </span>
         </div>
 
@@ -107,7 +107,7 @@ export const Header = ({ favCount, onOpenFav, onOpenOrder, showToast }) => {
             ))}
           </div>
           <div className="pt-2 border-t border-[#E6D9CF]/60 flex items-center justify-between px-3 text-xs text-[#845E4C]">
-            <span>Шоурум: г. Астана, пр. Мангилик Ел</span>
+            <span>Шоурум: Центральный проспект, 10</span>
             <span>10:00 – 21:00</span>
           </div>
         </div>

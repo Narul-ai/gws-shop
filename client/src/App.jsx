@@ -6,14 +6,23 @@ import { Advantages } from './components/Advantages';
 import { ProductCard } from './components/ProductCard';
 import { ShowroomBanner } from './components/ShowroomBanner';
 import { OrderModal } from './components/OrderModal';
-import { MessageCircle, ShoppingBag, Sparkles, Star, Globe, MapPin, Phone, Clock } from 'lucide-react';
+import {
+  MessageCircle,
+  ShoppingBag,
+  Sparkles,
+  Star,
+  Globe,
+  MapPin,
+  Phone,
+  Clock,
+} from 'lucide-react';
 
 export default function App() {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState('all');
   const [favorites, setFavorites] = useState(() => {
     try {
-      const saved = localStorage.getItem('gws_favorites');
+      const saved = localStorage.getItem('store_favorites');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -24,7 +33,7 @@ export default function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem('gws_favorites', JSON.stringify(favorites));
+    localStorage.setItem('store_favorites', JSON.stringify(favorites));
   }, [favorites]);
 
   useEffect(() => {
@@ -53,44 +62,47 @@ export default function App() {
   const lookbookSets = [
     {
       title: 'Офисный шик & Встречи',
-      desc: 'Базовый твидовый костюм + кожаная сумка Mini GWS',
+      desc: 'Базовый твидовый костюм + компактная сумка Mini Bag',
       price: '68 900 ₸',
       oldPrice: '73 900 ₸',
-      image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop',
+      image:
+        'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop',
     },
     {
-      title: 'Вечерний выход в Астане',
+      title: 'Вечерний выход',
       desc: 'Шелковое платье Silk + подбор аксессуаров стилистом',
       price: '44 000 ₸',
       oldPrice: '49 500 ₸',
-      image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=800&auto=format&fit=crop',
+      image:
+        'https://images.unsplash.com/photo-1566174053879-31528523f8ae?q=80&w=800&auto=format&fit=crop',
     },
     {
       title: 'Осенняя классика',
-      desc: 'Элегантное пальто KAS live + шелковый платок в подарок',
+      desc: 'Элегантное пальто Classic + шелковый платок в комплекте',
       price: '45 900 ₸',
       oldPrice: '52 000 ₸',
-      image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=800&auto=format&fit=crop',
+      image:
+        'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=800&auto=format&fit=crop',
     },
   ];
 
   const reviews = [
     {
       name: 'Айгерим К.',
-      city: 'Астана',
-      text: 'Заезжала в шоурум на Мангилик Ел за пальто — посадка просто идеальная, ткань плотная и очень приятная. Девочки помогли собрать целый образ!',
-      item: 'Элегантное пальто KAS live',
+      city: 'Центральный район',
+      text: 'Заезжала в шоурум за пальто — посадка просто идеальная, ткань плотная и очень приятная. Стилист помог собрать целый образ!',
+      item: 'Элегантное пальто Classic',
     },
     {
       name: 'Мадина С.',
-      city: 'Алматы',
-      text: 'Заказывала шелковое платье с доставкой в Алматы. Пришло за 2 дня в красивой упаковке, размер подошел точно по меркам стилиста.',
+      city: 'Северный округ',
+      text: 'Заказывала шелковое платье с доставкой до двери. Пришло за 2 дня в аккуратной упаковке, размер подошёл точно по меркам.',
       item: 'Шелковое вечернее платье Silk',
     },
     {
       name: 'Диана Т.',
-      city: 'Астана',
-      text: 'Обожаю GWS за то, что вещи не как у всех в масс-маркете. Твидовый костюм ношу уже второй месяц — выглядит как новый.',
+      city: 'Западный округ',
+      text: 'Нравится аккуратный подбор моделей и качественные ткани. Твидовый костюм ношу уже второй месяц — выглядит отлично.',
       item: 'Базовый твидовый костюм',
     },
   ];
@@ -183,12 +195,12 @@ export default function App() {
           </div>
         </section>
 
-        {/* Секция: Готовые капсулы / Lookbook (убирает ощущение пустоты и повышает средний чек) */}
+        {/* Секция: Готовые капсулы / Lookbook */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8">
             <div>
               <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.25em] text-[#845E4C] font-semibold mb-1">
-                <Sparkles size={13} /> Стилизация GWS
+                <Sparkles size={13} /> Стилизация каталога
               </span>
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#2A1C16]">
                 Готовые образы сезона
@@ -248,7 +260,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* Баннер шоурума в Астане */}
+        {/* Баннер шоурума */}
         <div id="showroom" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ShowroomBanner
             onOpenFastOrder={(reason) => setModalMode({ isOpen: true, type: 'fastOrder', reason })}
@@ -262,7 +274,7 @@ export default function App() {
               Доверие покупательниц
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#2A1C16]">
-              Отзывы о шоуруме GWS
+              Отзывы о шоуруме
             </h2>
           </div>
 
@@ -285,7 +297,7 @@ export default function App() {
                 <div className="pt-3 border-t border-[#F5EFEA] flex items-center justify-between">
                   <div>
                     <p className="text-sm font-bold text-[#2A1C16]">{rev.name}</p>
-                    <p className="text-[11px] text-stone-400">г. {rev.city}</p>
+                    <p className="text-[11px] text-stone-400">{rev.city}</p>
                   </div>
                   <span className="text-[10px] bg-[#F5EFEA] text-[#845E4C] px-2.5 py-1 rounded-full font-medium">
                     {rev.item}
@@ -302,24 +314,24 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-white/10">
             <div>
-              <div className="font-serif text-2xl font-bold tracking-[0.25em] text-white mb-2">
-                G W S
+              <div className="font-serif text-xl font-bold tracking-[0.22em] text-white mb-2 uppercase">
+                Your Store
               </div>
               <p className="text-xs text-[#E6D9CF]/80 leading-relaxed max-w-xs">
-                Шоурум женской одежды в Астане. Премиальные ткани, капсульные коллекции и индивидуальный подбор образов.
+                Демо-каталог женской одежды. Премиальные ткани, капсульные коллекции и индивидуальный подбор образов.
               </p>
             </div>
 
             <div className="space-y-2.5 text-xs text-[#E6D9CF]/90">
               <h4 className="font-serif text-base font-semibold text-white mb-3">Контакты</h4>
               <p className="flex items-center gap-2">
-                <MapPin size={14} className="text-[#B89685]" /> г. Астана, пр. Мангилик Ел (Бутик GWS)
+                <MapPin size={14} className="text-[#B89685]" /> Центральный проспект, 10, 2 этаж
               </p>
               <p className="flex items-center gap-2">
                 <Clock size={14} className="text-[#B89685]" /> Ежедневно с 10:00 до 21:00
               </p>
               <p className="flex items-center gap-2">
-                <Phone size={14} className="text-[#B89685]" /> +7 (777) 123-45-67
+                <Phone size={14} className="text-[#B89685]" /> +7 (700) 000-00-00
               </p>
             </div>
 
@@ -332,14 +344,14 @@ export default function App() {
                 className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white text-xs px-4 py-2.5 rounded-full transition"
               >
                 <Globe size={15} />
-                <span>@gowithshop</span>
+                <span>@yourstore</span>
               </a>
             </div>
           </div>
 
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#E6D9CF]/60 gap-2">
-            <p>© 2026 GWS Shop Astana. Все права защищены.</p>
-            <p>Доставка по всему Казахстану • Оплата при получении</p>
+            <p>© 2026 Your Store Demo. Все права защищены.</p>
+            <p>Доставка по всей стране • Оплата при получении</p>
           </div>
         </div>
       </footer>
@@ -361,7 +373,7 @@ export default function App() {
           </button>
 
           <a
-            href="https://wa.me/77000000000?text=Здравствуйте!%20Пишу%20с%20сайта%20GWS%20Астана"
+            href="https://wa.me/77000000000?text=Здравствуйте!%20Пишу%20с%20сайта%20каталога"
             target="_blank"
             rel="noreferrer"
             className="bg-[#25D366] text-white p-3.5 rounded-full shadow-lg flex items-center justify-center active:scale-95"
@@ -373,7 +385,7 @@ export default function App() {
 
       {/* Плавающая кнопка WhatsApp для ПК (справа снизу) */}
       <a
-        href="https://wa.me/77000000000?text=Здравствуйте!%20Пишу%20с%20сайта%20GWS%20Астана"
+        href="https://wa.me/77000000000?text=Здравствуйте!%20Пишу%20с%20сайта%20каталога"
         target="_blank"
         rel="noreferrer"
         title="Написать в WhatsApp"

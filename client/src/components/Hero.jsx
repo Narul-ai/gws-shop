@@ -16,7 +16,7 @@ export const Hero = ({ onOpenFastOrder }) => {
   const featuredLooks = [
     {
       tag: 'Выбор стилиста',
-      title: 'Капсула «Астана Осень»',
+      title: 'Осенняя капсула «Basic»',
       sizes: 'Размеры XS — XL • В наличии',
       price: '68 900 ₸',
       image:
@@ -24,7 +24,7 @@ export const Hero = ({ onOpenFastOrder }) => {
     },
     {
       tag: 'Хит продаж',
-      title: 'Пальто кашемир KAS live',
+      title: 'Пальто кашемир Classic',
       sizes: 'Размеры S — L • Осталось 3 шт.',
       price: '45 900 ₸',
       image:
@@ -74,7 +74,7 @@ export const Hero = ({ onOpenFastOrder }) => {
 
             <span className="inline-flex items-center gap-1.5 bg-[#2A1C16]/75 backdrop-blur-md border border-white/15 px-3 py-1.5 rounded-full text-[10px] text-[#E6D9CF]">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Шоурум Астана
+              Шоурум открыт
             </span>
           </div>
 
@@ -116,7 +116,7 @@ export const Hero = ({ onOpenFastOrder }) => {
                 <span className="italic font-normal text-[#E6D9CF]">индивидуальность</span>
               </h1>
               <p className="text-xs sm:text-sm text-[#F5EFEA]/85 font-light leading-relaxed max-w-md">
-                Премиальные ткани, идеальная посадка и примерка в шоуруме Астаны или с доставкой на дом.
+                Премиальные ткани, идеальная посадка и примерка в шоуруме или с доставкой на дом.
               </p>
             </div>
 
@@ -165,7 +165,7 @@ export const Hero = ({ onOpenFastOrder }) => {
               <div className="inline-flex items-center gap-2 bg-white/70 border border-[#E6D9CF] px-3.5 py-1.5 rounded-full text-xs text-stone-600">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <MapPin size={13} className="text-[#845E4C]" />
-                <span>Шоурум в Астане открыт</span>
+                <span>Шоурум открыт</span>
               </div>
             </div>
 
@@ -175,7 +175,7 @@ export const Hero = ({ onOpenFastOrder }) => {
             </h1>
 
             <p className="text-base text-stone-600 font-normal leading-relaxed max-w-xl">
-              Капсульная женская одежда из премиальных тканей с идеальной посадкой. Примерьте образы в нашем шоуруме в Астане или закажите быструю доставку с примеркой по всему Казахстану.
+              Капсульная женская одежда из премиальных тканей с идеальной посадкой. Примерьте образы в нашем шоуруме или закажите быструю доставку с примеркой по всей стране.
             </p>
 
             {/* Кнопки действий */}
@@ -212,7 +212,7 @@ export const Hero = ({ onOpenFastOrder }) => {
                   <span>1–3 дня</span>
                   <Truck size={16} className="text-[#845E4C]" />
                 </div>
-                <p className="text-xs text-stone-500 mt-0.5">Быстрая доставка по РК</p>
+                <p className="text-xs text-stone-500 mt-0.5">Быстрая доставка</p>
               </div>
               <div>
                 <div className="flex items-center gap-1.5 text-[#2A1C16] font-serif text-2xl font-bold">
